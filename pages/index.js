@@ -8,7 +8,7 @@ export default function Home() {
         <title>SocialMedia</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header/>
+      <Header />
     </div>
   );
 }

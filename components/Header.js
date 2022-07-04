@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GroupIcon from "@mui/icons-material/Group";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -8,15 +8,32 @@ import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import HeaderLink from "./HeaderLink";
 import { Avatar } from "@mui/material";
+import { useTheme } from "next-themes";
 
 function Header() {
+  const [mounted, setMounted] = useState(false);
+  const { setThenme, resolvedTheme, theme } = useTheme();
+
+  //After mounting, we have to access to the theme
+  useEffect(() => setMounted(true), []);
   return (
     <header>
       <div className="flex items-center space-x-2 w-full max-w-xs">
-        <div className="relative w-36 h-10 text-blue-600 font-bold">
-          SocialApp
-          {/* <Image/> */}
-        </div>
+        {mounted && (
+          <>
+            {resolvedTheme === "dark" ? (
+              <div className="relative w-36 h-10 text-white font-bold">
+                SocialApp
+                {/* <Image/> */}
+              </div>
+            ) : (
+              <div className="relative w-36 h-10 text-blue-600 font-bold">
+                SocialApp
+                {/* <Image/> */}
+              </div>
+            )}
+          </>
+        )}
         <div className="flex items-center space-x-1 dark:md:bg-gray-700 py-2.5 px-4 rounded w-full">
           <SearchRoundedIcon />
           <input
