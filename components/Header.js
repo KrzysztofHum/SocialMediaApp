@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import GroupIcon from "@mui/icons-material/Group";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -9,15 +9,22 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import HeaderLink from "./HeaderLink";
 import { Avatar } from "@mui/material";
 import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+
+const spring = {
+  type: "spring",
+  stiffness: 700,
+  damping: 30,
+};
 
 function Header() {
   const [mounted, setMounted] = useState(false);
-  const { setThenme, resolvedTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   //After mounting, we have to access to the theme
   useEffect(() => setMounted(true), []);
   return (
-    <header>
+    <header className="sticky top-0 z-40 bg-white dark:bg-[#1D2226] flex items-center justify-around py-1.5 px-3 focus-within:shadow-lg">
       <div className="flex items-center space-x-2 w-full max-w-xs">
         {mounted && (
           <>
@@ -51,6 +58,26 @@ function Header() {
         <HeaderLink Icon={NotificationsIcon} text="Notifications" feed />
         <HeaderLink Icon={Avatar} text="Me" feed avatar hidden />
         <HeaderLink Icon={AppsOutlinedIcon} text="Work" feed hidden />
+        {/* Dark mode toggle */}
+        {mounted && (
+          <div
+            className={`bg-gray-600 flex items-center px-0.5 rounded-full h-6 w-12 cursor-pointer flex-shrink-0 relative ${
+              resolvedTheme === "dark" ? "justify-end" : "justify-start"
+            }`}
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+          >
+            <span className="absolute left-0">🌜</span>
+            <motion.div
+              className="w-5 h-5 bg-white rounded-full z-40"
+              layout
+              transition={spring}
+            />
+
+            <span className="absolute right-0.5">🌞</span>
+          </div>
+        )}
       </div>
     </header>
   );
