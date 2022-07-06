@@ -3,8 +3,11 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import Image from "next/image";
 import React from "react";
+import { signOut, useSession } from "next-auth/react";
 
 function Sidebar() {
+  const { data: session } = useSession();
+
   return (
     <div className="space-y-2 min-w-max max-w-lg">
       {/* top */}
@@ -19,10 +22,10 @@ function Sidebar() {
         />
         <div className="mt-5 py-4 space-x-0.5">
           <h4 className="hover:underline decoration-purple-700 underline-offset-2 cursor-pointer">
-            Krzysztof
+            {session?.user?.name}
           </h4>
           <p className="text-black/60 dark:text-white/75 text-sm">
-            krzysztof@wp.pl
+            {session?.user?.email}
           </p>
         </div>
         <div className="hidden md:inline text-left dark:text-white/75 text-sm">
