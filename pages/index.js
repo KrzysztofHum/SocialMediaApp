@@ -12,8 +12,8 @@ import { useRecoilState } from "recoil";
 import { connectToDatabase } from "../util/mongodb";
 
 export default function Home({ posts }) {
-  const { modalOpen, setModalOpen } = useRecoilState(modalState);
-  const { modalType, setModalType } = useRecoilState(modalTypeState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const [modalType, setModalType] = useRecoilState(modalTypeState);
   const router = useRouter();
   const { status } = useSession({
     required: true,
@@ -37,7 +37,7 @@ export default function Home({ posts }) {
           {/* Feed */}
         </div>
         {/* Widgets */}
-        <Widgets articles={articles} />
+        <Widgets />
         <AnimatePresence>
           {modalOpen && (
             <Modal handleClose={() => setModalOpen(false)} type={modalType} />

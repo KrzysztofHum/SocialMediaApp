@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
@@ -11,8 +10,9 @@ import { modalState, modalTypeState } from "../atoms/modalAtom";
 
 function Input() {
   const { data: session } = useSession();
-  const { modalOpen, setModalOpen } = useRecoilState(modalState);
-  const { modalType, setModalType } = useRecoilState(modalTypeState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const [modalType, setModalType] = useRecoilState(modalTypeState);
+
   return (
     <div className="bg-white dark:bg-[#1D2226] rounded-lg p-3 space-y-3 border border-gray-300 dark:border-none">
       <div className="flex items-center space-x-2">

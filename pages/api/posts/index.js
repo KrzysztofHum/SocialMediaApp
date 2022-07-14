@@ -3,7 +3,7 @@ import { Timestamp } from "mongodb";
 
 export default async function handler(req, res) {
   const { method, body } = req;
-  const { db } = await connectToDatabase;
+  const { db } = await connectToDatabase();
 
   if (method === "GET") {
     try {

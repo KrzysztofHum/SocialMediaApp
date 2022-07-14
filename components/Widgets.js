@@ -15,7 +15,7 @@ function Widgets({ articles }) {
         </div>
 
         <div className="space-y-1">
-          {articles.slice(0, 5).map((article) => (
+          {/* {articles.slice(0, 5).map((article) => (
             <div
               key={article.url}
               className="flex space-x-2 items-center cursor-pointer hover:bg-black/10 dark:hover:bg-black/20 px-2.5 py-1"
@@ -31,7 +31,7 @@ function Widgets({ articles }) {
                 />
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
       {/* Ads */}

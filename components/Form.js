@@ -1,4 +1,3 @@
-import React from "react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
@@ -29,6 +28,9 @@ function Form() {
         "Content-Type": "application/json",
       },
     });
+
+    const responseData = await response.json();
+    console.log(responseData);
 
     setHandlePost(true);
     setModalOpen(false);
