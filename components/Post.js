@@ -15,6 +15,8 @@ import { useSession } from "next-auth/react";
 
 function Post({ post, modalPost }) {
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const [modalType, setModalType] = useRecoilState(modalTypeState);
+  const [postState, setPostState] = useRecoilState(getPostState);
   const [showInput, setShowInput] = useState(false);
   const truncate = (string, n) =>
     string?.length > n ? string.substr(0, n - 1) + "...see more" : string;
