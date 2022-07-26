@@ -1,5 +1,4 @@
 import { connectToDatabase } from "../../../util/mongodb";
-import { Timestamp } from "mongodb";
 
 export default async function handler(req, res) {
   const { method, body } = req;
@@ -7,7 +6,7 @@ export default async function handler(req, res) {
 
   if (method === "GET") {
     try {
-      const stats = await db.collection("viewStats").find().toArray();
+      const stats = await db.collection("viewStats").find({id: body.id}).toArray();
       res.status(200).json(stats);
     } catch (error) {
       res.status(500).json(error);
@@ -21,7 +20,7 @@ export default async function handler(req, res) {
         setDefaultsOnInsert: true,
       };
       const stats = await db.collection("viewStats").findOneAndUpdate(
-        { name: "test1" },
+        { id: body.id },
         {
           $inc: {
             view: 1,
